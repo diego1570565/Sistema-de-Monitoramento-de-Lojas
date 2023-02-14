@@ -6,7 +6,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
-
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="icon" type="image/x-icon" href="img/ville_lg.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -151,16 +151,14 @@ require 'Assets/rodapé.html';
 </html>
 <?php
 if (!empty($_GET['msg']) && $_GET['msg'] != '') {
-    if ($_GET['msg'] == 'Nao_autenticado') {
-        $_GET['msg'] = 'Usuario não autenticado, Favor fazer login';
-    }
-    if ($_GET['msg'] == 'Usuario_ou_Senha_Incorretos') {
-        $_GET['msg'] = 'Usuario ou senha Inválidos';
-    }
-    if ($_GET['msg'] == 'Senha_vazia') {
-        $_GET['msg'] = 'Usuario ou senha Inválidos';
-    }
-    echo '<script> alert("' . $_GET['msg'] . '") </script>';
+
+    echo "<script>    Swal.fire({
+        icon: 'error',
+        title: 'ERRO',
+        text: 'Usuario ou senha Inválidos!',
+    })</script>";
+
+
 }
 
 ?>
