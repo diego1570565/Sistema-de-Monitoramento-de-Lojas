@@ -10,7 +10,9 @@ $SearchField = "samaccountname";
 $LDAPHost = "192.168.100.210";
 $dn = "DC=villefort,DC=local";
 $LDAPUser = $_POST['user_login'];
+
 $_SESSION['nome'] = $_POST['user_login'];
+
 $LDAPUserPassword = $_POST['pass_login'];
 $LDAPFieldsToFind = array("*");
 $cnx = ldap_connect($LDAPHost) or die($mensageHTML = "Não foi possivel iniciar a conexão.");

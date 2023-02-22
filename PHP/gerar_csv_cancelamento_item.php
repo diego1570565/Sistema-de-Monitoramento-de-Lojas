@@ -42,7 +42,6 @@ $query = "
         $row['nome'] . ';' . 
         $row['motivocanc'] . ';' . PHP_EOL;
         fwrite($arquivo, $texto);
-
      }
 }
 

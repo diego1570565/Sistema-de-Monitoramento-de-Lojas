@@ -115,52 +115,7 @@ if ($_SESSION['cancelamento_tef'] != true) {
         console.log(Cod_loja1)
     }
     function Excel(){
-   location.assign('../Uploads/Cancelamento_TEF/Cancelamento_TEF.csv')
-//         fetch('')
-//         .then(response => response.text())
-//         .then(text => {
-//             var array = text.split("\n");
-
-//             itens = JSON.parse(localStorage.getItem('itens'))
-//             tudo = ''
-//             for (var i = 0; i < array.length; i++) {
-
-//                 var modificado = array[i].split(";")
-
-
-//                 for(var g = 1; g < itens.length; g++){
-
-
-//                     if (modificado[0] == itens[g]['codfilial']){
-
-//                         modificado[0] = itens[g]['nome'];
-
-//                     }
-
-//                 }
-//                 total = modificado.toString()
-//                 total = total.replace(/,/g, ";") + "\r\n"
-//                 console.log(total)
-
-//                 var tudo = tudo + total
-//             }
-//             download(tudo, 'Cancelamento_TEF.csv')
-//         })
-
-
-//         function download(content, filename, contentType){
-
-//                 if(!contentType){
-//                 contentType = 'application/octet-stream';
-//             }
-//             var a = document.createElement('a');
-//             var blob = new Blob([content], {'type':contentType});
-//             a.href = window.URL.createObjectURL(blob);
-//             a.download = filename;
-//             a.click();
-// }
-
-
+        location.assign('../Uploads/Cancelamento_TEF/Cancelamento_TEF.csv')
     }
     function requisitarPagina(url) {
     if (!document.getElementById('loading')) {

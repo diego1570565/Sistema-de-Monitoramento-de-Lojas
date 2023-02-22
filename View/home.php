@@ -36,6 +36,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <style>
     a {
@@ -55,21 +56,25 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     }
 </style>
 
-<body>
+<body style="overflow-y:hidden">
 
-    <nav class="mb-4 w-100 navbar navbar-expand-md navbar-dark bg-dark">
+    <nav class="mb-4 w-100 navbar navbar-expand-md navbar-success bg-success">
         <div class="text-light text-center  container-fluid">
             <h5 class="mt-1" style="letter-spacing: .2rem;">
-            <?php echo strtoupper($_SESSION['nome']); ?>
+                <?php
+echo strtoupper($_SESSION['nome']);
+?>
             </h5>
 
             <h6 class="mt-1" style="letter-spacing: .2rem;">
             <div class="mb-1">
+            <a href="https://www.villefort.com.br/" target="_blank">
                 <img src="../img/ville_lg.png" style="width:30px" alt="">
+</a>
             </div>
-             
+
             <div>
-                <span>MONITORAMENTO</span>             
+                <span>MONITORAMENTO</span>
             </div>
             </h6>
 
@@ -79,14 +84,15 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
         </div>
     </nav>
 
-    <div class="mt-5 container-fluid">
+    <div class="my-4 container-fluid">
         <div class="row justify-content-center ">
-            <div style="border:10px ;border-top-style:groove;border-left-style:ridge ;border-right-style:groove; border-bottom-style:ridge; background-color:#fff "  class="card">
+            <div style="border:10px ;border-top-style:groove;border-left-style:ridge ;border-right-style:groove; border-bottom-style:ridge; background-color:#fff "  class="card mb-5">
                 <div class="card-body h-100 mt-5 mx-5">
-                    <div class="container">
+                    <div class=" container">
 
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
-                            <div class="justify-content-between row">
+
+                        <div class="justify-content-between row">
 
                             <!--  POSICAO CAIXA -->
 
@@ -212,7 +218,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
 
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
 
-                            <div class="justify-content-between row mb-5">
+                            <div class="justify-content-between row">
 
                             <!-- STATUS VNC -->
 
@@ -275,22 +281,65 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
 
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
 
+                             <div class="row mb-5">
+
+            
+                                <div class="btn m-2  p-4 btn-lg btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                    --
+                                </div>
+                         
+                         
+                                <a href="Fluxo Auditoria/index.php"  target="_blank">
+                                    <div class="btn m-2 p-4 btn-lg btn-outline-info">
+                                        Fluxo Auditoria
+                                    </div>
+                                </a>
+                          
+                                <div class="btn m-2  p-4 btn-lg btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                    --
+                                </div>
+                           
+                         
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-    require('../Assets/rodapé.html');
-    ?>
-    <!-- <div class="container text-center mb-2 mt-2 sticky-bottom rounded bg-dark text-light mt-5 w-25 shadow">Developed by <span id="footer" style="cursor: default;"><b>Diego de Oliveira</b></span></div> -->
+
+    <footer class="fixed-bottom py-2 bg-success text-light d-flex align-items-center">
+        <div class="container-fluid">
+            <div class="row">
+                <span class='text-left col-5'>Copyright &copy; 2023  - Monitoramento Villefort</span>
+                <div  class="col-4 sticky-bottom rounded bg-success text-light w-25">Developed by <span id="footer" style="cursor: default;"><b>Diego de Oliveira</b></span></div>
+                <span class="d-inline-block col-2 text-right">Version 1.4.0</span>
+            </div>
+        </div>
+    </footer>
 
 </body>
 <?php
 
 if (!empty($_GET['msg']) && $_GET['msg'] != '') {
-    echo '<script> alert("Você não possui permissão para acessar essa página") </script>';
+
+    echo "<script> Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Você não possui permissão para acessar essa página',
+    }) </script>";
+}
+
+if (isset($_GET['email']) && $_GET['email'] != '') {
+    echo "<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Não foi encrontrado nenhum email que corresponda a sua matricula, favor atualizar seu email no WinThor!',
+    })
+</script>";
+
 }
 
 ?>

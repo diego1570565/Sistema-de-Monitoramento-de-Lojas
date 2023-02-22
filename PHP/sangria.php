@@ -5,7 +5,7 @@
     }
 </style>
 
-<table class="table table-striped  table-sm">
+<table class="table table-striped table-sm">
 <thead style='z-index: 0; position: sticky; top: 64px;' class=" letra thead-dark ">
         <tr>
             <th scope="col">Loja</th>
@@ -137,7 +137,7 @@ if ($result = $conn->query($query)) {
         $texto = PHP_EOL;
         fwrite($arquivo, $texto);
 
-        echo '<tr id = "1" onclick = "marcarID(this.id)">';
+        echo '<tr id = "' . $numeroenvelope  . '" onclick = "marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . convertDate($data) . '</th>';
         echo '<th>' . $caixa . '</th>';

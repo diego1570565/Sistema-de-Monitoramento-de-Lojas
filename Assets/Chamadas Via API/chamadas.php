@@ -70,10 +70,4 @@ for ($i = 0; $i <= $quantidade_resultado; $i++) {
 
 header('location:' . $nome);
 
-// $texto = 'hora;';
-// fwrite($arquivo, $texto);
-// $texto = 'protocolo;';
-// fwrite($arquivo, $texto);
-// $texto = 'phone;';
-// fwrite($arquivo, $texto);
 }

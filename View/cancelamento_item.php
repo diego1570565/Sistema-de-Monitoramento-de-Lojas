@@ -102,7 +102,7 @@ if ($_SESSION['cancelamento_item'] != true) {
 </body>
 <script>
 
-var Data_movimentacaoFim = false
+    var Data_movimentacaoFim = false
     var Data_movimentacaoInicio = false
     var Cod_loja1 = false
     var Cod_pdv1 = false

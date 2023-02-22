@@ -134,7 +134,7 @@ if ($result = $conn->query($query)) {
         fwrite($arquivo, $texto);
 
 
-        echo '<tr id = "' . $cupom . $sequencia . '"onclick ="marcarID(this.id)">';
+        echo '<tr id = "'. rand(2,30) . $cupom . $sequencia . '"onclick ="marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . $codigo_pvd . '</th>';
         echo '<th>' . convertDate($data_movimento) . '</th>';

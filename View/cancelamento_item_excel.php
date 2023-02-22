@@ -39,7 +39,6 @@ if ($_SESSION['cancelamento_item'] != true) {
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <style>
-    
     body {
         background: lightgrey;
     }
@@ -54,9 +53,9 @@ if ($_SESSION['cancelamento_item'] != true) {
         <div class="my-2">
             <form method="POST" action="../PHP/gerar_csv_cancelamento_item.php">
                 <span style="font-size: 20px;" class="text-light p-2">Data Início</span>
-                <input style="width: 250px" class="m-3 p-2" id="data_inicio" name="data_inicio" type="date">
+                <input style="width: 250px" class="m-3 p-2" id="data_inicio" name="data_inicio" required type="date">
                 <span style="font-size: 20px;"  class="text-light p-2">Data Fim</span>
-                <input style="width: 250px" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" type="date">
+                <input style="width: 250px" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" required type="date">
                 <br>
                 <input onclick="verificar(this.id)" type="submit" class="btn w-50 btn-primary my-4 p-3" value="Gerar Arquivo CSV" name="Chamadas" id="bt1">
              
@@ -70,13 +69,6 @@ if ($_SESSION['cancelamento_item'] != true) {
 </body>
 <script>
 
-    function verificar(id){
-        // if ($('#data_inicio').val() == '' || ('#data_fim').val() == '')
-        // {
-        //     event.preventDefault();
-        //     alert('Favor preencher os campos de data')
-        // }
-    }
 
     setInterval(() => {
         data = sessionStorage.getItem('chave');
