@@ -70,6 +70,7 @@ if ($_SESSION['posicao_caixa'] != true) {
                             <div class="col" id='filtro_loja1' style='height:43px; z-index: 1;'></div>
                             <input class="col mr-2 form-control" style='height:43px' placeholder="PDV" id="Cod_pdv" name='Cod_pdv'>
                             <input type="date" class="col form-control" style='height:43px;' placeholder="Data Mov." id="Data_Mov" name='Data_Mov'>
+                            <div id='ocultar' class="col" style='height:43px;  z-index: 1;'></div>
                             <div class="col">
                                 <button style="width:100%" class="btn p-2 btn-success" onclick="get_dados_html() , pesquisar()">Pesquisar</button>
                             </div>
@@ -145,14 +146,25 @@ if ($_SESSION['posicao_caixa'] != true) {
     }
     function pesquisar() {
         if (Cod_loja1 == false && Data_movimentacao == false && Cod_pdv1 == false && situacao1 == false) {
-            console.log('tudo falso')
             requisitarPagina('../PHP/posicao_caixa.php')
             $('#filtro_loja1').load('../PHP/loja.php')
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_posicao_caixa.php')
         }
         else {
-            console.log('aqui')
+
+            nome = '';
+            $('#ocultar :checkbox:checked').each(function () {
+                if (nome != '') {
+                    nome = nome + (this.value) + ',';
+                }
+                else {
+                    nome = (this.value) + ','
+                }
+            });
+
+
             valCod_loja = '';
-            $(':checkbox:checked').each(function () {
+            $('#filtro_loja1 :checkbox:checked').each(function () {
                 if (valCod_loja != '') {
                     valCod_loja = valCod_loja + (this.value) + ',';
                 }
@@ -160,10 +172,15 @@ if ($_SESSION['posicao_caixa'] != true) {
                     valCod_loja = (this.value) + ','
                 }
             });
+
+            nome = nome.substring(0, nome.length - 1);
+
             myStopFunction()
             valCod_loja = valCod_loja.substring(0, valCod_loja.length - 1);
             $('#filtro_loja1').load('../PHP/loja.php?Cod_loja=' + valCod_loja)
-            requisitarPagina('../PHP/posicao_caixa.php?situacao=' + valsituacao + '&Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv + '&Data_mov=' + valData)
+            requisitarPagina('../PHP/posicao_caixa.php?situacao=' + valsituacao +  '&Nomes=' + nome + '&Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv + '&Data_mov=' + valData)
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_posicao_caixa.php?Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv  + '&Data_mov=' + valData  + '&Nomes=' + nome)
+         
         }
         tempo()
 

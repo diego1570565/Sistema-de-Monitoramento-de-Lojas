@@ -6,7 +6,7 @@
 <meta http-equiv=”Content-Type” content=”text/html; charset=utf-8″>
 <table class="table table-striped table-sm">
 <thead style='z-index: 0; position: sticky; top: 64px;' class=" letra thead-dark ">
-        <tr>
+        <tr class="text-center">
             <th scope="col">Loja</th>
             <th scope="col">PDV</th>
             <th scope="col">Data Mov.</th>
@@ -97,7 +97,13 @@ if (!empty($_GET['Cod_pdv'])) {
     $query = $query . ' AND d.numero_pdv =' . $_GET['Cod_pdv'];
 }
 
+if (!empty($_GET['Nomes'])) {
+     $query = $query . ' AND codigo_identificacao NOT IN (' . $_GET['Nomes'] . ')' ;
+}
+
+
 $query = $query . ' order by data_venda, d.numero_loja, d.numero_pdv';
+
 
 if ($result = $conn->query($query)) {
 
@@ -134,7 +140,7 @@ if ($result = $conn->query($query)) {
         fwrite($arquivo, $texto);
 
 
-        echo '<tr id = "'. rand(2,30) . $cupom . $sequencia . '"onclick ="marcarID(this.id)">';
+        echo '<tr class="text-center" id = "'. rand(2,30) . $cupom . $sequencia . '"onclick ="marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . $codigo_pvd . '</th>';
         echo '<th>' . convertDate($data_movimento) . '</th>';

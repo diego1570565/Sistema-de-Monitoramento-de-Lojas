@@ -130,41 +130,6 @@ if ($_SESSION['cancelamento_item'] != true) {
 
         location.assign('../Uploads/Cancelamento_item/Cancelamento_item.csv')
         
-        // fetch('')
-        // .then(response => response.text())
-        // .then(text => {
-        //     var array = text.split("\n");
-
-        //     itens = JSON.parse(localStorage.getItem('itens'))
-        //     tudo = ''
-        //     for (var i = 0; i < array.length; i++) {
-
-        //         var modificado = array[i].split(";")
-
-
-        //         for(var g = 1; g < itens.length; g++){
-
-
-        //             if (modificado[0] == itens[g]['codfilial']){
-
-        //                 modificado[0] = itens[g]['nome'];
-
-        //             }
-
-        //         }
-        //         total = modificado.toString()
-        //         total = total.replace(/,/g, ";") + "\r\n"
-        //         console.log(total)
-
-        //         var tudo = tudo + total
-        //     }
-
-
-        //     download(tudo, 'Cancelamento_item.csv')
-
-        // })
-
-
         function download(content, filename, contentType){
 
                 if(!contentType){
@@ -273,6 +238,7 @@ if ($_SESSION['cancelamento_item'] != true) {
             requisitarPagina('../PHP/cancelamento_item.php?Cod_loja=' + 
             valCod_loja + '&Cod_pdv=' + valCod_pdv + '&Nomes=' + nome + 
             '&Data_Inicio=' + valDataInicio  + '&Data_Fim=' + valDataFim )
+            
             $('#ocultar').load('../PHP/ocultar.php?Cod_loja=' + valCod_loja + 
             '&Cod_pdv=' + valCod_pdv  + '&Data_Inicio=' + valDataInicio  + 
             '&Data_Fim=' + valDataFim + '&Nomes=' + nome)

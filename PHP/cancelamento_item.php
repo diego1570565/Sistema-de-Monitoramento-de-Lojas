@@ -7,7 +7,7 @@
 <script src="../js/dados.js"></script>
 <table class="table table-striped table-sm">
 <thead style='z-index: 0; position: sticky; top: 74px;' class="letra thead-dark ">
-        <tr>
+        <tr class="text-center">
             <th scope="col" style="width: 150px;">Loja</th>
             <th scope="col">PDV</th>
             <th scope="col">Data Mov.</th>
@@ -96,7 +96,7 @@ if ($result = $conn->query($query)) {
         $texto = PHP_EOL;
         fwrite($arquivo, $texto);
 
-        echo '<tr id = "' . $numero_cupom . $sequencia . '"onclick ="marcarID(this.id)">';
+        echo '<tr class="text-center" id = "' . $numero_cupom . $sequencia . '"onclick ="marcarID(this.id)">';
         
         if ($codigo_loja != 27 && $codigo_loja != 29) {
             echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';

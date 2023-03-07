@@ -6,8 +6,8 @@
 </style>
 
 <table class="table table-striped table-sm">
-<thead style='z-index: 0; position: sticky; top: 64px;' class=" letra thead-dark ">
-        <tr>
+    <thead style='z-index: 0; position: sticky; top: 64px;' class=" letra thead-dark ">
+        <tr class="text-center">
             <th scope="col">Loja</th>
             <th scope="col">Data</th>
             <th scope="col">Caixa</th>
@@ -19,13 +19,14 @@
             <th scope="col">Nome Autorizou</th>
         </tr>
     </thead>
-    <tbody>
-<?php
+<tbody>
 
+<?php
 
 
 $nome1 = '../Uploads/Sangria/Sangria.csv';
 $arquivo = fopen($nome1, 'w');
+
 $texto = 'Loja;';
 fwrite($arquivo, $texto);
 $texto = 'Data;';
@@ -100,8 +101,13 @@ if (!empty($_GET['Cod_loja'])) {
 if (!empty($_GET['Cod_pdv'])) {
     $query = $query . ' AND numero_pdv =' . $_GET['Cod_pdv'];
 }
+if (!empty($_GET['Nomes'])) {
+    $query = $query . ' AND movimento_sangria.usuario_autorizou NOT IN (' . $_GET['Nomes'] . ')';
+}
 
 $query = $query . ' ORDER BY data_movimento, FILIAL ASC , HORA_SANGRIA DESC;';
+
+
 
 if ($result = $conn->query($query)) {
 
@@ -137,7 +143,7 @@ if ($result = $conn->query($query)) {
         $texto = PHP_EOL;
         fwrite($arquivo, $texto);
 
-        echo '<tr id = "' . $numeroenvelope  . '" onclick = "marcarID(this.id)">';
+        echo '<tr class="text-center" id = "' . $numeroenvelope  . '" onclick = "marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . convertDate($data) . '</th>';
         echo '<th>' . $caixa . '</th>';

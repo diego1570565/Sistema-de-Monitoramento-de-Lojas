@@ -43,7 +43,7 @@ if ($result = $conn->query($query)) {
 </div>
 <table class="table table-striped table-sm" id="table_pdv">
     <thead style='z-index: 0; position: sticky; top: 66px;' class=" letra thead-dark ">
-        <tr>
+        <tr class="text-center">
             <th scope="col" style ='width:15%' >Loja</th>
             <th scope="col" style ='width:15%'>PDV</th>
             <th scope="col" style ='width:15%'>Data Mov.</th>
@@ -78,9 +78,16 @@ if (!empty($_GET['Data_mov'])) {
     $query = $query . ' AND dat_mov=current_date';}
 if (!empty($_GET['Cod_loja'])) {
     $query = $query . ' AND cod_loj IN(' . $_GET['Cod_loja'] . ')';}
+
 if (!empty($_GET['Cod_pdv'])) {
     $query = $query . ' AND num_pdv =' . $_GET['Cod_pdv'];
 }
+
+if (!empty($_GET['Nomes'])) {
+    $query = $query . ' AND codigo_operador NOT IN (' . $_GET['Nomes'] . ')' ;
+}
+
+
 $query = $query . ' order by cod_loj, num_pdv';
 if ($result = $conn->query($query)) {
     while ($row = $result->fetch_assoc()) {
@@ -89,7 +96,7 @@ if ($result = $conn->query($query)) {
         $data_movimento = $row['DATA'];
         $situacao = $row['POSICAO'];
         $operador = $row['OPERADOR'];
-        echo '<tr id = "' . $codigo_loja . $codigo_pvd . '"onclick ="marcarID(this.id)">';
+        echo '<tr class="text-center" id = "' . $codigo_loja . $codigo_pvd . '"onclick ="marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . $codigo_pvd . '</th>';
         echo '<th>' . convertDate($data_movimento) . '</th>';

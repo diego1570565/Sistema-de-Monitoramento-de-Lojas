@@ -112,11 +112,10 @@
         text-decoration:none;
     }
     a:hover{
-
         color:#fff;
         text-decoration:none;
-
     }
+
     </style>
     <body>
         <div class="bg-success">
@@ -155,9 +154,9 @@
         <footer class="fixed-bottom py-2 bg-success text-light d-flex align-items-center">
             <div class="container-fluid">
                 <div class="row">
-                    <span class='text-left col-5'>Copyright &copy; 2023  - Monitoramento Villefort</span>
-                    <div  class="col-4 sticky-bottom rounded bg-success text-light w-25">Developed by <span id="footer" style="cursor: default;"><b>Diego de Oliveira</b></span></div>
-                    <span class="d-inline-block col-2 text-right">Version 1.4.0</span>
+                    <span class='text-left col-6'>Copyright &copy; 2023  - Monitoramento Villefort</span>
+                    <div  class="col-6 text-center sticky-bottom rounded bg-success text-light w-25"></div>
+          
                 </div>
             </div>
         </footer>

@@ -1,8 +1,10 @@
+
 <?php
 session_start();
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     $var1 = true;
     header('Location: ../index.php?msg=Nao_autenticado');}
+   
 ?>
 
 <!DOCTYPE html>
@@ -42,6 +44,10 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     a {
         color: azure;
     }
+    *{
+        font-family: Didot;
+        font-size: 18px;
+    }
 
     .btn {
         margin: 5px;
@@ -49,50 +55,64 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
 
     body {
         background: lightgrey;
+        overflow-x:hidden;
     }
     .btn-lg{
         border:1px solid black;
         width:300px;
+        font-family :FreeMono;
+        font-size: 18px;
+    }
+    *{
+        cursor: default;
     }
 </style>
 
 <body style="overflow-y:hidden">
 
-    <nav class="mb-4 w-100 navbar navbar-expand-md navbar-success bg-success">
-        <div class="text-light text-center  container-fluid">
-            <h5 class="mt-1" style="letter-spacing: .2rem;">
-                <?php
-echo strtoupper($_SESSION['nome']);
-?>
-            </h5>
+    <div class="mb-2 w-100 bg-success">
+     
 
-            <h6 class="mt-1" style="letter-spacing: .2rem;">
-            <div class="mb-1">
-            <a href="https://www.villefort.com.br/" target="_blank">
-                <img src="../img/ville_lg.png" style="width:30px" alt="">
-</a>
-            </div>
+        <div class="text-light text-center container-fluid">   
+            <div class="row py-2">
+                <div class="col-3 d-flex pt-3">
+                    <h6 class="mt-1" style="letter-spacing: .2rem;">
+                        <?php
+                            echo strtoupper($_SESSION['nome']);
+                        ?>
+                    </h6>
+                </div>
+        
+            <h6 class="col-6" style="letter-spacing: .2rem;">
+ 
+                <a  href="https://www.villefort.com.br/" target="_blank">
+                    <img src="../img/ville_lg.png" style="width:30px" alt="">
+                </a>
 
-            <div>
-                <span>MONITORAMENTO</span>
-            </div>
+                <div class="mt-2">
+                    <span>MONITORAMENTO</span>
+                </div>
+                
             </h6>
-
-            <a href="../PHP/Logoff.php">
-                <img class="mr-5" src="../img/porta.png" width='80px' alt="">
+        <div class="col-3 pt-2">
+            <a  href="../PHP/Logoff.php">
+                <img style="cursor:pointer;" src="../img/porta.png" width='80px' alt="">
             </a>
-        </div>
-    </nav>
+            </div>
+            </div>
 
-    <div class="my-4 container-fluid">
+        </div>
+    </div>
+
+    
         <div class="row justify-content-center ">
             <div style="border:10px ;border-top-style:groove;border-left-style:ridge ;border-right-style:groove; border-bottom-style:ridge; background-color:#fff "  class="card mb-5">
                 <div class="card-body h-100 mt-5 mx-5">
-                    <div class=" container">
+                    <div class="container">
 
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
 
-                        <div class="justify-content-between row">
+                        <div  class="justify-content-between row">
 
                             <!--  POSICAO CAIXA -->
 
@@ -283,38 +303,52 @@ echo strtoupper($_SESSION['nome']);
 
                              <div class="row mb-5">
 
-            
+
                                 <div class="btn m-2  p-4 btn-lg btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                     --
                                 </div>
-                         
-                         
-                                <a href="Fluxo Auditoria/index.php"  target="_blank">
-                                    <div class="btn m-2 p-4 btn-lg btn-outline-info">
-                                        Fluxo Auditoria
+
+                                <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                      <a href="Fluxo Auditoria/index.php"  target="_blank">
+                                <?php }?>
+                                    <div class="btn m-2 p-4 btn-lg
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                    btn-outline-info">
+                                <?php } else {?>
+                                    btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                <?php }?>
+                                    Fluxo Auditoria
                                     </div>
-                                </a>
-                          
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                    </a>
+                                <?php }?>
+                         
+
                                 <div class="btn m-2  p-4 btn-lg btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                     --
                                 </div>
-                           
-                         
+
+
                             </div>
+
+
+           
+
+
 
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+   
 
     <footer class="fixed-bottom py-2 bg-success text-light d-flex align-items-center">
         <div class="container-fluid">
             <div class="row">
-                <span class='text-left col-5'>Copyright &copy; 2023  - Monitoramento Villefort</span>
-                <div  class="col-4 sticky-bottom rounded bg-success text-light w-25">Developed by <span id="footer" style="cursor: default;"><b>Diego de Oliveira</b></span></div>
-                <span class="d-inline-block col-2 text-right">Version 1.4.0</span>
+                <span class='text-left col-3'>Copyright &copy; 2023  - Monitoramento Villefort</span>
+                <div  class="col-6 text-center sticky-bottom rounded bg-success text-light w-25"></div>
+                <span class="d-inline-block col-3 text-right"></span>
             </div>
         </div>
     </footer>
@@ -356,7 +390,6 @@ if (isset($_GET['email']) && $_GET['email'] != '') {
                 varfilialS = variavel.filialS
                 filial.push({ codfilial: varcodfilial, nome: varfilialS })
             }
-            console.log(filial)
             localStorage.setItem('itens', JSON.stringify(filial));
         });
     }

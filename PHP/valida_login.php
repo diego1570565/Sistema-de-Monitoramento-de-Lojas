@@ -23,7 +23,9 @@ header('location:../index.php?msg=Senha_vazia');}
 @ldap_bind($cnx, $LDAPUser . $LDAPUserDomain, $LDAPUserPassword) or die("<script>window.location.replace('../index.php?msg=Usuario_ou_Senha_Incorretos');</script>");
 error_reporting(E_ALL ^ E_NOTICE);
 $filter = "(samaccountname=" . $LDAPUser . ")";
+
 $sr = ldap_search($cnx, $dn, $filter, $LDAPFieldsToFind);
+
 $info = ldap_get_entries($cnx, $sr);
 
 for ($x = 0; $x < $info["count"]; $x++) {
@@ -65,6 +67,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
         $acesso = false;
     endif;
 }
+
 //=========================================================================
 for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
@@ -206,6 +209,73 @@ for ($x = 0; $x < $info["count"]; $x++) {
     endif;
 }
 //=========================================================================
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode("," , $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Perdas', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+            $_SESSION['prevencao'] = true;
+            $_SESSION['gerente'] = false;
+            $_SESSION['central'] = false;
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode("," , $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Gerente', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+            $_SESSION['prevencao'] = false;
+            $_SESSION['gerente'] = true;
+            $_SESSION['central'] = false;
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode("," , $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Central', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+            $_SESSION['prevencao'] = false;
+            $_SESSION['gerente'] = false;
+            $_SESSION['central'] = true;
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+
 if ($x == 0):
     $mensageHTML = "Você não possui permissão para este acesso.";
 endif;

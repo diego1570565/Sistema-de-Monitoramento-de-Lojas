@@ -51,11 +51,12 @@ if ($_SESSION['call_center'] != true) {
         <div class="my-2">
             <form method="POST" action="../PHP/gerar_csv_call_center.php">
                 <span style="font-size: 20px;" class="text-light p-2">Data Início</span>
-                <input style="width: 250px" class="m-3 p-2" id="data_inicio" name="data_inicio" required type="date">
+                <input style="width: 250px; border-radius: 5px;" class="m-3 p-2" id="data_inicio" name="data_inicio" required type="date">
                 <span style="font-size: 20px;" class="text-light p-2">Data Fim</span>
-                <input style="width: 250px" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" required type="date"><br>
-                <input onclick="verificar(this.id)" type="submit" class="btn btn-block btn-primary my-4 p-3" value="Gerar Arquivo de Chamadas" name="Chamadas" id="bt1">
-                <input onclick="verificar(this.id)" type="submit" class="btn btn-block btn-info my-4 p-3" value="Gerar Arquivo de Chamadas Qualificadas" name="ChamadasQualificadas" id="bt1">
+                <input style="width: 250px; border-radius: 5px;" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" required type="date"><br>
+                <input onclick= type="submit" class="btn btn-block btn-primary my-4 p-3" value="Gerar Arquivo de Chamadas" name="Chamadas" id="bt1">
+                <input onclick= type="submit" class="btn btn-block btn-info my-4 p-3" value="Gerar Arquivo de Chamadas Qualificadas" name="ChamadasQualificadas" id="bt1">
+                <input onclick="verificar()" type="submit" class="btn btn-block btn-success my-4 p-3" value="Lista de Ramais Cadastrados" name="ChamadasQualificadas" id="bt1">
             </form>
         </div>
     </div>
@@ -65,12 +66,9 @@ if ($_SESSION['call_center'] != true) {
         require('../Assets/rodapé.html');
     ?>
 <script>
-    function verificar(id){
-        // if ($('#data_inicio').val() == '' || ('#data_fim').val() == '')
-        // {
-        //     event.preventDefault();
-        //     alert('Favor preencher os campos de data')
-        // }
+    function verificar(){
+        event.preventDefault();
+        location.assign('ramais_existentes.php')
     }
 </script>
 </html>

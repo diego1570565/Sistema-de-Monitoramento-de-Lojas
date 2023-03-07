@@ -52,20 +52,24 @@ if ($_SESSION['cancelamento_item'] != true) {
         <h2 style=" font-weight: lighter;" class="mb-5">Período</h2>
         <div class="my-2">
             <form method="POST" action="../PHP/gerar_csv_cancelamento_item.php">
+             
                 <span style="font-size: 20px;" class="text-light p-2">Data Início</span>
-                <input style="width: 250px" class="m-3 p-2" id="data_inicio" name="data_inicio" required type="date">
-                <span style="font-size: 20px;"  class="text-light p-2">Data Fim</span>
-                <input style="width: 250px" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" required type="date">
+                <input style="width: 250px; border-radius: 8px;" class="m-3 p-2 bg-light border-none" id="data_inicio" name="data_inicio" required type="date">
+
+     
+                <label for="data_fim" style="font-size: 20px;"  class="text-light p-2"> Data Fim </label>
+                <input style="width: 250px; border-radius: 8px;" class="m-3 mb-5 p-2" id = "data_fim" name="data_fim" required type="date">
+
                 <br>
                 <input onclick="verificar(this.id)" type="submit" class="btn w-50 btn-primary my-4 p-3" value="Gerar Arquivo CSV" name="Chamadas" id="bt1">
-             
+
             </form>
         </div>
     </div>
 </div>
 <?php
-        require('../Assets/rodapé.html');
-    ?>
+require '../Assets/rodapé.html';
+?>
 </body>
 <script>
 

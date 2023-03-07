@@ -6,7 +6,7 @@
 <script src="../js/dados.js"></script>
 <table class="table table-striped  table-sm" id="table_pdv">
 <thead style='z-index: 0; position: sticky; top: 64px;' class=" letra thead-dark ">
-        <tr>
+        <tr class="text-center">
             <th scope="col">Loja</th>
             <th scope="col">PDV</th>
             <th scope="col">Data Venda</th>
@@ -77,10 +77,16 @@ if (!empty($_GET['Data_Inicio']) && !empty($_GET['Data_Fim'])) {
 if (!empty($_GET['Cod_loja'])) {
     $query = $query . ' AND c.numero_loja IN(' . $_GET['Cod_loja'] . ')';
 }
+
 if (!empty($_GET['Cod_pdv'])) {
     $query = $query . ' AND c.numero_pdv =' . $_GET['Cod_pdv'];
 }
+if (!empty($_GET['Nomes'])) {
+    $query = $query . ' AND codigo_identificacao NOT IN (' . $_GET['Nomes'] . ')';
+}
+
 $query = $query . ' order by c.hora_venda, numero_loja, numero_pdv ,c.data_venda';
+
 if ($result = $conn->query($query)) {
     while ($row = $result->fetch_assoc()) {
         $codigo_loja = $row['FILIAL'];
@@ -111,7 +117,7 @@ if ($result = $conn->query($query)) {
         $texto = PHP_EOL;
         fwrite($arquivo, $texto);
 
-        echo '<tr id = "' . $cupom . '"onclick ="marcarID(this.id)">';
+        echo '<tr class="text-center" id = "' . $cupom . '"onclick ="marcarID(this.id)">';
         echo '<th class = "loja_' . $codigo_loja . '">' . $codigo_loja . '</th>';
         echo '<th>' . $codigo_pvd . '</th>';
         echo '<th>' . convertDate($data_movimento) . '</th>';

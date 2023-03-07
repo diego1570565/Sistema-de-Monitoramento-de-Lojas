@@ -76,6 +76,7 @@ if ($_SESSION['sangria'] != true) {
                             <input type="date" class="col form-control" style='height:43px;' placeholder="Data Fim"
                                 id="Data_fim" name='Data_Mov'>
                             <div class="mx-1"></div>
+                            <div id='ocultar' class="col" style='height:43px;  z-index: 1;'></div>
                             <button class="btn p-2 col btn-success"
                                 onclick="get_dados_html() , pesquisar()">Pesquisar</button>
                             <div class="mx-1"></div>
@@ -169,10 +170,25 @@ if ($_SESSION['sangria'] != true) {
 
             requisitarPagina('../PHP/sangria.php')
             $('#filtro_loja1').load('../PHP/loja.php')
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_sangria.php')
         }
         else {
+
+            nome = '';
+            $('#ocultar :checkbox:checked').each(function () {
+                if (nome != '') {
+                    nome = nome + (this.value) + ',';
+                }
+                else {
+                    nome = (this.value) + ','
+                }
+            });
+
+            nome = nome.substring(0, nome.length - 1);
+            console.log(nome)
             valCod_loja = '';
-            $(':checkbox:checked').each(function () {
+            $('#filtro_loja1 :checkbox:checked').each(function () {
+
                 if (valCod_loja != '') {
 
                     valCod_loja = valCod_loja + (this.value) + ',';
@@ -187,58 +203,15 @@ if ($_SESSION['sangria'] != true) {
             }
             valCod_loja = valCod_loja.substring(0, valCod_loja.length - 1);
             $('#filtro_loja1').load('../PHP/loja.php?Cod_loja=' + valCod_loja)
-            requisitarPagina('../PHP/sangria.php?Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim)
-            console.log(excel)
+
+            requisitarPagina('../PHP/sangria.php?Cod_loja=' + valCod_loja + '&Nomes=' + nome + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim)
+            
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_sangria.php?Cod_loja=' + valCod_loja  + '&Cod_pdv=' + valCod_pdv  + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim + '&Nomes=' + nome)
         }
     }
     function Excel() {
 
         location.assign('../Uploads/Sangria/Sangria.csv')
-
-        // fetch('')
-        // .then(response => response.text())
-        // .then(text => {
-        //     var array = text.split("\n");
-
-        //     itens = JSON.parse(localStorage.getItem('itens'))
-        //     tudo = ''
-        //     for (var i = 0; i < array.length; i++) {
-
-        //         var modificado = array[i].split(";")
-
-
-        //         for(var g = 1; g < itens.length; g++){
-
-
-        //             if (modificado[0] == itens[g]['codfilial']){
-
-        //                 modificado[0] = itens[g]['nome'];
-
-        //             }
-        //         }
-        //         total = modificado.toString()
-        //         total = total.replace(/,/g, ";") + "\r\n"
-        //         var tudo = tudo + total
-        //     }
-        //     download(tudo, 'Sangria.csv')
-
-        // })
-
-
-        function download(content, filename, contentType) {
-
-            if (!contentType) {
-                contentType = 'application/octet-stream';
-            }
-            var a = document.createElement('a');
-            var blob = new Blob([content], { 'type': contentType });
-            a.href = window.URL.createObjectURL(blob);
-            a.download = filename;
-            a.click();
-        }
-
-
-
 
     }
 

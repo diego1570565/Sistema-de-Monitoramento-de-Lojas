@@ -72,6 +72,7 @@ if ($_SESSION['desconto'] != true) {
                             <input type="date" class="col form-control" style='height:43px;' placeholder="Data Fim"
                                 id="Data_fim" name='Data_Mov'>
                             <div class="mx-1"></div>
+                            <div id='ocultar' class="col" style='height:43px;  z-index: 1;'></div>
                             <button class="btn p-2 col btn-success"
                                 onclick="get_dados_html() , pesquisar()">Pesquisar</button>
                             <div class="mx-1"></div>
@@ -119,39 +120,6 @@ if ($_SESSION['desconto'] != true) {
                 
         location.assign('../Uploads/Desconto/desconto.csv')
 
-// fetch('../Uploads/Desconto/desconto.csv')
-        // .then(response => response.text())
-        // .then(text => {
-        //     var array = text.split("\n");
-
-        //     itens = JSON.parse(localStorage.getItem('itens'))
-        //     tudo = ''
-        //     for (var i = 0; i < array.length; i++) {
-
-        //         var modificado = array[i].split(";")
-
-                
-        //         for(var g = 1; g < itens.length; g++){
-
-
-        //             if (modificado[0] == itens[g]['codfilial']){
-
-        //                 modificado[0] = itens[g]['nome'];
-
-        //             }
-
-        //         }
-        //         total = modificado.toString()
-        //         total = total.replace(/,/g, ";") + "\r\n"
-
-        //         var tudo = tudo + total 
-        //     }
-
-          
-
-        //     download(tudo, 'desconto.csv')
-
-        // })
 
 
         function download(content, filename, contentType){
@@ -206,23 +174,42 @@ if ($_SESSION['desconto'] != true) {
         if (Cod_loja1 == false && Data_movimentacaoInicio == false && Data_movimentacaoFim == false && Cod_pdv1 == false) {
             $('#filtro_loja1').load('../PHP/loja.php')
             requisitarPagina('../PHP/desconto.php')
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_desconto.php')
         }
         else {
+
+            nome = '';
+            $('#ocultar :checkbox:checked').each(function () {
+                if (nome != '') {
+                    nome = nome + (this.value) + ',';
+                }
+                else {
+                    nome = (this.value) + ','
+                }
+            });
+
+            nome = nome.substring(0, nome.length - 1);
+
             valCod_loja = '';
-            $(':checkbox:checked').each(function () {
+            $('#filtro_loja1 :checkbox:checked').each(function () {
                 if (valCod_loja != '') {
                     valCod_loja = valCod_loja + (this.value) + ',';
                 }
                 else {
                     valCod_loja = (this.value) + ','
                 }
-            });
+              
+            });  
+            
+          
+            
             if (Data_movimentacaoInicio == true && Data_movimentacaoFim == false || Data_movimentacaoInicio == false && Data_movimentacaoFim == true) {
             alert('Favor Preencher Todos od campos de Data')
         }
             valCod_loja = valCod_loja.substring(0, valCod_loja.length - 1);
             $('#filtro_loja1').load('../PHP/loja.php?Cod_loja=' + valCod_loja)
-            requisitarPagina('../PHP/desconto.php?Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio  + '&Data_Fim=' + valDataFim)
+            requisitarPagina('../PHP/desconto.php?Cod_loja=' + valCod_loja + '&Nomes=' + nome + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio  + '&Data_Fim=' + valDataFim)
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_desconto.php?Cod_loja=' + valCod_loja  + '&Cod_pdv=' + valCod_pdv  + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim + '&Nomes=' + nome)
         }
         const itens = JSON.parse(localStorage.getItem('itens'))
         for (i = 0; i < itens.length; i++) {
