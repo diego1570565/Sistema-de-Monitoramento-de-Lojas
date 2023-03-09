@@ -280,7 +280,6 @@ if ($x == 0):
     $mensageHTML = "Você não possui permissão para este acesso.";
 endif;
 if ($acesso === true):
-
     //-------------------------------------
     // $_SESSION['status_vnc'] = true;
     // $_SESSION['cancelamento_item'] = true;
@@ -290,11 +289,6 @@ if ($acesso === true):
     // $_SESSION['sangria'] = true;
     // $_SESSION['posicao_caixa'] = true;
     // $_SESSION['cancelamento_tef'] = true;
-
-    // $_SESSION['prevencao'] = false;
-    // $_SESSION['gerente'] = false;
-    // $_SESSION['central'] = true;
-
     //--------------------------------------
 
     $_SESSION['autenticado'] = 'sim';

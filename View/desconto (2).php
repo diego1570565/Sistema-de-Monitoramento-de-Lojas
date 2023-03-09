@@ -1,24 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<?php
-
+    <?php
 session_start();
 
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     $var1 = true;
     header('Location:../index.php?msg=Nao_autenticado');}
 
-if ($_SESSION['cupom_cancelado'] != true) {
+if ($_SESSION['desconto'] != true) {
+    $var1 = true;
     header('Location:home.php?msg=Sem_permissao');}
-
 ?>
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link rel="icon" type="image/x-icon" href="../img/ville_lg.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cupom Cancelado</title>
+    <title>Desconto</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -28,10 +32,12 @@ if ($_SESSION['cupom_cancelado'] != true) {
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+    <script src="../js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <script src="../js/dados.js"></script>
 </head>
 <style>
@@ -48,9 +54,7 @@ if ($_SESSION['cupom_cancelado'] != true) {
     width: 300px;
     opacity: 0.5;
 }
-
 </style>
-
 <body onload="pesquisar()">
     <div class="container-fluid">
     <div  style='height:90px;' class="row sticky-top">
@@ -59,9 +63,11 @@ if ($_SESSION['cupom_cancelado'] != true) {
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col" id='filtro_loja1' style='height:43px; z-index: 1;'></div>
-                            <input class="col form-control" style='height:43px' placeholder="PDV" id="Cod_pdv" name='Cod_pdv'>
+                            <input class="col form-control" style='height:43px' placeholder="PDV" id="Cod_pdv"
+                                name='Cod_pdv'>
                             <div class="mx-1"></div>
-                            <input type="date" class="col form-control" style='height:43px;' placeholder="Data Inicio" id="Data_inicio" name='Data_Mov'>
+                            <input type="date" class="col form-control" style='height:43px;' placeholder="Data Inicio"
+                                id="Data_inicio" name='Data_Mov'>
                                 <span class='text-light mx-1 mt-2' >ATÉ</span>
                             <input type="date" class="col form-control" style='height:43px;' placeholder="Data Fim"
                                 id="Data_fim" name='Data_Mov'>
@@ -83,21 +89,18 @@ if ($_SESSION['cupom_cancelado'] != true) {
         </div>
     </div>
     </div>
-
+    <script src="../js/get_loja.js"></script>
 </body>
 <script>
-
     var Data_movimentacaoFim = false
     var Data_movimentacaoInicio = false
     var Cod_loja1 = false
     var Cod_pdv1 = false
-
     function get_dados_html() {
         valCod_loja = $('#filtro_loja').val()
         valCod_pdv = $('#Cod_pdv').val()
         valDataInicio = $('#Data_inicio').val()
         valDataFim = $('#Data_fim').val()
-
         if (valCod_loja != '') {
             Cod_loja1 = true
         } if (valCod_pdv != '') {
@@ -107,7 +110,6 @@ if ($_SESSION['cupom_cancelado'] != true) {
         } if (valDataFim != '') {
             Data_movimentacaoFim = true
         }
-
         console.log(Data_movimentacaoInicio)
         console.log(Data_movimentacaoFim)
         console.log(Cod_pdv1)
@@ -115,10 +117,13 @@ if ($_SESSION['cupom_cancelado'] != true) {
     }
     function Excel(){
 
-   location.assign('../Uploads/Cupom_Cancelado/Cupom_cancelado.csv')
+                
+        location.assign('../Uploads/Desconto/desconto.csv')
+
+
 
         function download(content, filename, contentType){
-
+                
                 if(!contentType){
                 contentType = 'application/octet-stream';
             }
@@ -130,52 +135,46 @@ if ($_SESSION['cupom_cancelado'] != true) {
 }
 
 
+
     }
-
     function requisitarPagina(url) {
+    if (!document.getElementById('loading')) {
+        let imgLoading = document.createElement('img')
+        imgLoading.id = 'loading'
+        imgLoading.src = '../img/loading.gif'
+        imgLoading.className = 'meio rounded mx-auto d-block w-25'
+        document.getElementById('dados').appendChild(imgLoading)
+    }
+    let ajax = new XMLHttpRequest();
+    ajax.open('GET', url)
+    ajax.onreadystatechange = () => {
+        if (ajax.readyState == 4) {
+            document.getElementById('loading').remove()
+            document.getElementById('dados').innerHTML = ajax.responseText
 
-        if (!document.getElementById('loading')) {
-            let imgLoading = document.createElement('img')
-            imgLoading.id = 'loading'
-            imgLoading.src = '../img/loading.gif'
-            imgLoading.className = 'meio rounded mx-auto d-block w-25'
-            document.getElementById('dados').appendChild(imgLoading)
+	        trocar_nome_filial()
+
         }
-
-        let ajax = new XMLHttpRequest();
-        ajax.open('GET', url)
-        ajax.onreadystatechange = () => {
-            if (ajax.readyState == 4) {
-                document.getElementById('loading').remove()
-                document.getElementById('dados').innerHTML = ajax.responseText
-
-                    trocar_nome_filial()
-
-            }
-        }
-        ajax.send()
-
-        function trocar_nome_filial() {
+    }
+    ajax.send()
+    function trocar_nome_filial() {
         itens = JSON.parse(localStorage.getItem('itens'))
         for (i = 0; i < itens.length; i++) {
             $('.loja_' + itens[i]['codfilial']).text(itens[i]['nome']);
         }
     }
-
-
-
-
-            function marcarID(id) {
-                $('#' + id).toggleClass('text-white bg-dark')
-            }
-        }
-
-
+    }
+    function trocar_nome_filial() {
+    itens = JSON.parse(localStorage.getItem('itens'))
+    for (i = 0; i < itens.length; i++) {
+        $('.loja_' + itens[i]['codfilial']).text(itens[i]['nome']);
+    }
+    }
     function pesquisar() {
         if (Cod_loja1 == false && Data_movimentacaoInicio == false && Data_movimentacaoFim == false && Cod_pdv1 == false) {
             $('#filtro_loja1').load('../PHP/loja.php')
-            requisitarPagina('../PHP/cupom_cancelado.php')
-            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_cupom_cancelado.php')
+            requisitarPagina('../PHP/desconto.php')
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_desconto.php')
         }
         else {
 
@@ -188,7 +187,7 @@ if ($_SESSION['cupom_cancelado'] != true) {
                     nome = (this.value) + ','
                 }
             });
-            
+
             nome = nome.substring(0, nome.length - 1);
 
             valCod_loja = '';
@@ -199,25 +198,27 @@ if ($_SESSION['cupom_cancelado'] != true) {
                 else {
                     valCod_loja = (this.value) + ','
                 }
-            });
-
+              
+            });  
+            
+          
+            
             if (Data_movimentacaoInicio == true && Data_movimentacaoFim == false || Data_movimentacaoInicio == false && Data_movimentacaoFim == true) {
             alert('Favor Preencher Todos od campos de Data')
         }
             valCod_loja = valCod_loja.substring(0, valCod_loja.length - 1);
             $('#filtro_loja1').load('../PHP/loja.php?Cod_loja=' + valCod_loja)
-            requisitarPagina('../PHP/cupom_cancelado.php?Cod_loja=' + valCod_loja + '&Nomes=' + nome + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio  + '&Data_Fim=' + valDataFim)
-
-            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_cupom_cancelado.php?Cod_loja=' + valCod_loja + '&Cod_pdv=' + valCod_pdv  + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim + '&Nomes=' + nome)
-
+            requisitarPagina('../PHP/desconto.php?Cod_loja=' + valCod_loja + '&Nomes=' + nome + '&Cod_pdv=' + valCod_pdv + '&Data_Inicio=' + valDataInicio  + '&Data_Fim=' + valDataFim)
+            $('#ocultar').load('../Assets/filtro_pessoas/filtro_pessoa_desconto.php?Cod_loja=' + valCod_loja  + '&Cod_pdv=' + valCod_pdv  + '&Data_Inicio=' + valDataInicio + '&Data_Fim=' + valDataFim + '&Nomes=' + nome)
+        }
+        const itens = JSON.parse(localStorage.getItem('itens'))
+        for (i = 0; i < itens.length; i++) {
+            $('.loja_' + itens[i]['codfilial']).text(itens[i]['nome']);
         }
     }
-
     document.body.addEventListener('keydown', function (event) {
     const key = event.key;
     const code = event.keyCode;
-
-
     if (key == 'Enter'){
         get_dados_html()
         pesquisar()
@@ -226,8 +227,6 @@ if ($_SESSION['cupom_cancelado'] != true) {
     setInterval(function () {
         pesquisar()
     }, 300000);
-
-
     trocar_nome_filial()
 </script>
 

@@ -48,7 +48,7 @@ if ($_SESSION['cancelamento_item'] != true) {
     }
     .meio{
         position: sticky;
-        top:;
+        top:0;
         bottom: 275px;
         left: 0;
         right: 0;
