@@ -1,0 +1,44 @@
+.form-control {
+    margin-bottom: 10px;
+}
+
+.container{
+    font-size: 18px;
+}
+
+*{
+    font-family: Didot;
+}
+.pointer{
+    cursor: pointer;
+}
+
+body {
+    overflow-x: hidden;
+    background: #f5f5f5;
+}
+
+.preenchido {
+    border: 1px solid green;
+}
+
+.vazio {
+    border: 1px solid red;
+}
+
+.borda_inferior {
+    border-bottom: 2px solid black;
+}
+
+.transparente {
+    opacity: 0.5;
+}
+
+.col-6{
+    margin-bottom: 10px;
+}
+
+.btn{
+    font-family: Dejavu Sans;
+    font-size:15px;
+}

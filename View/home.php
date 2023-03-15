@@ -1,10 +1,9 @@
-
 <?php
 session_start();
 if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     $var1 = true;
     header('Location: ../index.php?msg=Nao_autenticado');}
-   
+    
 ?>
 
 <!DOCTYPE html>
@@ -95,7 +94,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
                 
             </h6>
         <div class="col-3 pt-2">
-            <a  href="../PHP/Logoff.php">
+            <a  href="../Controller/Logoff.php">
                 <img style="cursor:pointer;" src="../img/porta.png" width='80px' alt="">
             </a>
             </div>
@@ -308,18 +307,18 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
                                     --
                                 </div>
 
-                                <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
                                       <a href="Fluxo Auditoria/index.php"  target="_blank">
                                 <?php }?>
                                     <div class="btn m-2 p-4 btn-lg
-                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
                                     btn-outline-info">
                                 <?php } else {?>
                                     btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                 <?php }?>
                                     Fluxo Auditoria
                                     </div>
-                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true) {?>
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
                                     </a>
                                 <?php }?>
                          

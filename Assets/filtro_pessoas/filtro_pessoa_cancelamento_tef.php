@@ -18,7 +18,7 @@
 
        
 <?php
-require '../../PHP/conexao.php';
+require '../../Controller/conexao.php';
 
 $query = 'SELECT
 distinct(COD_SUP) AS "COD SUPERVISOR",

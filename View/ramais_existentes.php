@@ -31,46 +31,78 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
+
+<body class="bg-dark">
+
+<div class="container-fluid  table table-dark text-light  p-3">
+       <h1 class="ml-5 text-center" style="font-weight: lighter;">Ramais Existentes</h1>
+</div>
+
+
+<div class="container">
+  <form method="post">
+
+    <input type="text"  style="width: 1000px ;" class="form-control m-3" placeholder="Digite o Ramal" name="ramais" id="ramais">
+    <input type="submit" style="width: 300px ;" class="btn m-3 btn-success" value="Buscar">
+
+  </form>
+
 <table class="table table-dark">
   <thead>
     <tr>
-      <th scope="col">Lista de Ramais</th>
-    
+      <th scope="col text-center">Lista de Ramais</th>
     </tr>
-
-
   </thead>
   <tbody>
-    
+
 
 <?php
-require '../PHP/conexao.php';
 
-if (isset($_POST['busca'])){
-  $query = "select number from ramais_sip where number = ".$_POST['busca']." ORDER BY number";
-}else{
-  $query = "select number from ramais_sip ORDER BY number";
+require '../Controller/conexao.php';
+
+$a = true;
+$trouxe = false;
+
+if (!empty($_POST['ramais'])) {
+    $query = "select number from ramais_sip where number = " . $_POST['ramais'] . " ORDER BY number";
+    $trouxe = true;
+} else {
+    $query = "select number from ramais_sip ORDER BY number";
+    $a = false;
 }
-
-
-
-$number='';
 
 if ($result = $conn_asterisk->query($query)) {
-    while ($row = $result->fetch_assoc()) {
-        
-      if ($number != ''){
-        $ramal = $row['number'];
-        echo '<tr>
-        <td> '. intval($ramal) .'</td>
-      </tr>';}
-      
-      $number = 1;
-    }
-}
 
+    while ($row = $result->fetch_assoc()) {
+
+        if ($a == true) {
+
+
+
+            if ($trouxe == false) {
+                echo '<tr><td> ' . $row['number'] . '</td></tr>';
+            } 
+            
+            else {
+
+
+                echo '<tr><td class="bg-success"> ' . $row['number'] . '</td></tr>';
+                
+
+            }
+
+
+        }
+             
+      $a = true;
+    }
+
+    
+}
 
 ?>
 
 </tbody>
 </table>
+</div>
+</body>

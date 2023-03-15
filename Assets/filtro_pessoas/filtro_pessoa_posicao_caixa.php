@@ -18,7 +18,7 @@
 
        
 <?php
-require '../../PHP/conexao.php';
+require '../../Controller/conexao.php';
 
 $query = "SELECT  distinct(u.nome) as OPERADOR ,codigo_operador
 FROM ctr_abr_pdv_loj c, movimento_entrada_operador m, usuario_security u

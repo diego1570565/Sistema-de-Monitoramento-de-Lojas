@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2 mt-5 mx-auto">
                     <div style="border:10px ;border-top-style:groove;border-left-style:ridge ;border-right-style:groove; border-bottom-style:ridge; background-color:#fff "  class="form-container">
-                        <form action="PHP/valida_login.php" method="post">
+                        <form action="Controller/valida_login.php" method="post">
                             <div class="form-group">
                                 <label for="username">Login AD: </label>
                                 <input autocomplete="off" type="text" id="username" name="user_login" required>

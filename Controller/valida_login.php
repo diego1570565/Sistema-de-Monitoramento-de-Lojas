@@ -18,8 +18,8 @@ $LDAPFieldsToFind = array("*");
 $cnx = ldap_connect($LDAPHost) or die($mensageHTML = "Não foi possivel iniciar a conexão.");
 ldap_set_option($cnx, LDAP_OPT_PROTOCOL_VERSION, 3);
 ldap_set_option($cnx, LDAP_OPT_REFERRALS, 0);
-if($LDAPUserPassword == ''){
-header('location:../index.php?msg=Senha_vazia');}
+if ($LDAPUserPassword == '') {
+    header('location:../index.php?msg=Senha_vazia');}
 @ldap_bind($cnx, $LDAPUser . $LDAPUserDomain, $LDAPUserPassword) or die("<script>window.location.replace('../index.php?msg=Usuario_ou_Senha_Incorretos');</script>");
 error_reporting(E_ALL ^ E_NOTICE);
 $filter = "(samaccountname=" . $LDAPUser . ")";
@@ -28,11 +28,14 @@ $sr = ldap_search($cnx, $dn, $filter, $LDAPFieldsToFind);
 
 $info = ldap_get_entries($cnx, $sr);
 
+// Ola caro desenvolvedor que está lendo no futuro
+// abaixo estou fazendo uma varredura no AD procurando validações em cada validação possivel
+
 for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -52,7 +55,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -73,7 +76,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -93,7 +96,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -113,7 +116,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -133,7 +136,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -153,7 +156,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -173,7 +176,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -193,7 +196,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -213,7 +216,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -235,7 +238,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -257,7 +260,7 @@ for ($x = 0; $x < $info["count"]; $x++) {
     if ($info[$x]['memberof']['count'] != 0):
         echo '<pre>';
         foreach ($info[$x]['memberof'] as $key):
-            $key = explode("," , $key);
+            $key = explode(",", $key);
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
@@ -276,14 +279,40 @@ for ($x = 0; $x < $info["count"]; $x++) {
 }
 //=========================================================================
 
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode(",", $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Testes', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+            $_SESSION['desenvolvedor'] = true;
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+
 if ($x == 0):
     $mensageHTML = "Você não possui permissão para este acesso.";
 endif;
 if ($acesso === true):
 
+    // Esses codigos comentados abaixo servem para forçar a validação em cada sessão para validar as paginas
+    // Se descomentar algum essa validação será feita na sessão necessária
+    // As sessões [prevencao], [gerente] e [central] só uma pode ser true pois agem dependendo uma da outra
+    // Elas servem para o Fluxo Auditoria e qualquer uma da acesso a página
+    // A session [autenticado] é obrigatoria sempre estar descomentada
 
     //-------------------------------------
-    
+
     // $_SESSION['status_vnc'] = true;
     // $_SESSION['cancelamento_item'] = true;
     // $_SESSION['call_center'] = true;
@@ -293,6 +322,7 @@ if ($acesso === true):
     // $_SESSION['posicao_caixa'] = true;
     // $_SESSION['cancelamento_tef'] = true;
 
+    // $_SESSION['desenvolvedor'] = true;
     // $_SESSION['prevencao'] = false;
     // $_SESSION['gerente'] = false;
     // $_SESSION['central'] = true;
@@ -301,9 +331,6 @@ if ($acesso === true):
 
     $_SESSION['autenticado'] = 'sim';
     header('location:../View/home.php');
-
 else:
     header('location:../index.php?msg=Usuario_ou_Senha_Incorretos');
 endif;
-?>
-

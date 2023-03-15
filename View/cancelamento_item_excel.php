@@ -51,7 +51,7 @@ if ($_SESSION['cancelamento_item'] != true) {
     <div style=" font-weight: lighter; text-transform: uppercase; letter-spacing: .2rem;" class="container-fluid text-center bg-dark text-light p-5  my-5">
         <h2 style=" font-weight: lighter;" class="mb-5">Período</h2>
         <div class="my-2">
-            <form method="POST" action="../PHP/gerar_csv_cancelamento_item.php">
+            <form method="POST" action="../Controller/gerar_csv_cancelamento_item.php">
              
                 <span style="font-size: 20px;" class="text-light p-2">Data Início</span>
                 <input style="width: 250px; border-radius: 8px;" class="m-3 p-2 bg-light border-none" id="data_inicio" name="data_inicio" required type="date">
@@ -72,8 +72,6 @@ require '../Assets/rodapé.html';
 ?>
 </body>
 <script>
-
-
     setInterval(() => {
         data = sessionStorage.getItem('chave');
         console.log(data)

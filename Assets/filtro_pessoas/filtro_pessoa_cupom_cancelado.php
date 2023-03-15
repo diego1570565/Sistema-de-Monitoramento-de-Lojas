@@ -18,7 +18,7 @@
 
        
 <?php
-require '../../PHP/conexao.php';
+require '../../Controller/conexao.php';
 
 $query = 'select
 distinct(nome), codigo_identificacao
