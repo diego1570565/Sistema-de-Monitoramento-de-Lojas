@@ -13,7 +13,7 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoramento</title>
+    <title>Monitoramento - Auditoria</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -88,13 +88,13 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
                 </a>
 
                 <div class="mt-2">
-                    <span> MONITORAMENTO - PRINCIPAL </span>
+                    <span>MONITORAMENTO - AUDITORIA</span>
                 </div>
                 
             </h6>
         <div class="col-3 pt-2">
-            <a  href="../Controller/Logoff.php">
-                <img style="cursor:pointer;" src="../img/porta.png" width='80px' alt="">
+            <a  href="home.php">
+                <img style="cursor:pointer;" src="../img/voltar.png" width='45px' height="45px" alt="">
             </a>
             </div>
             </div>
@@ -112,100 +112,125 @@ if (!isset($_SESSION['autenticado']) || $_SESSION['autenticado'] != 'sim') {
 
                         <div  class="justify-content-center row">
 
-                            <!--  POSICAO CAIXA -->
+        
+                            <!--  CANCELAMENTO ITEM -->
 
-                                <?php if ($_SESSION['posicao_caixa'] == true) {?>
-                                    <a href="posicao_caixa.php" target="_blank">
+                                <?php if ($_SESSION['cancelamento_item'] == true) {?>
+                                    <a href="cancelamento_item.php" target="_blank">
                                 <?php }?>
                                     <div class="btn m-2 p-4 btn-lg
-                                <?php if ($_SESSION['posicao_caixa'] == true) {?>
+                                <?php if ($_SESSION['cancelamento_item'] == true) {?>
                                     btn-outline-primary">
                                 <?php } else {?>
                                     btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                 <?php }?>
-                                    Posição de Caixa
+                                    Cancelamento de Item
                                     </div>
-                                <?php if ($_SESSION['posicao_caixa'] == true) {?>
+                                <?php if ($_SESSION['cancelamento_item'] == true) {?>
                                     </a>
                                 <?php }?>
 
-                            <!-- FIM POSICAO CAIXA -->
+                            <!-- FIM CANCELAMENTO ITEM -->
 
-                            <?php if ($_SESSION['Auditoria'] == true) {?>
-                                    <a href="menu_fluxo.php">
+                            <!--  SANGRIA -->
+
+                                <?php if ($_SESSION['sangria'] == true) {?>
+                                    <a href="sangria.php" target="_blank">
                                 <?php }?>
                                     <div class="btn m-2 p-4 btn-lg
-                                <?php if ($_SESSION['Auditoria'] == true) {?>
-                                    btn-outline-info">
+                                <?php if ($_SESSION['sangria'] == true) {?>
+                                    btn-outline-primary">
                                 <?php } else {?>
                                     btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                 <?php }?>
-                                    Auditoria
+                                    Sangria
                                     </div>
-                                <?php if ($_SESSION['Auditoria'] == true) {?>
+                                <?php if ($_SESSION['sangria'] == true) {?>
                                     </a>
                                 <?php }?>
 
-                                <?php if ($_SESSION['status_vnc'] == true) {?>
-                                    <a href="http://192.168.101.16/devProj/index.php?app=vnc" target="_blank">
+                            <!-- FIM SANGRIA -->
+                            
+                            <!-- DESCONTO -->
+                            <?php if ($_SESSION['desconto'] == true) {?>
+                                    <a href="desconto.php" target="_blank">
                                 <?php }?>
                                     <div class="btn m-2 p-4 btn-lg
-                                <?php if ($_SESSION['status_vnc'] == true) {?>
-                                    btn-outline-warning">
+                                <?php if ($_SESSION['desconto'] == true) {?>
+                                    btn-outline-primary">
                                 <?php } else {?>
-                                    btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                    btn-secondary" style="opacity : 0.5; border:none; cursor: not-allowed;" >
                                 <?php }?>
-                                    Status VNC
+                                    Desconto
                                     </div>
-                                <?php if ($_SESSION['status_vnc'] == true) {?>
+                                <?php if ($_SESSION['desconto'] == true) {?>
                                     </a>
                                 <?php }?>
 
-                       
+                                    <!-- FIM DESCONTO -->
+
                             </div>
 
-      
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
 
                             <div class="justify-content-center row">
 
+                            <!-- CUPOM CANCELADO -->
 
-                            <!--  CALL CENTER -->
-
-                                <?php if ($_SESSION['call_center'] == true) {?>
-                                    <a href="call_center.php" target="_blank">
+                                <?php if ($_SESSION['cupom_cancelado'] == true) {?>
+                                    <a href="cupom_cancelado.php" target="_blank">
                                 <?php }?>
                                     <div class="btn m-2 p-4 btn-lg
-                                <?php if ($_SESSION['call_center'] == true) {?>
+                                <?php if ($_SESSION['cupom_cancelado'] == true) {?>
+                                    btn-outline-primary">
+                                <?php } else {?>
+                                    btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                <?php }?>
+                                       Cupom Cancelado
+                                    </div>
+                                <?php if ($_SESSION['cupom_cancelado'] == true) {?>
+                                    </a>
+                                <?php }?>
+
+                            <!-- FIM CUPOM CANCELADO -->
+
+                            <!-- CANCELAMENTO TEF -->
+
+                                <?php if ($_SESSION['cancelamento_tef'] == true) {?>
+                                    <a href="cancelamento_tef.php" target="_blank">
+                                <?php }?>
+                                    <div class="btn m-2 p-4 btn-lg
+                                <?php if ($_SESSION['cancelamento_tef'] == true) {?>
+                                    btn-outline-primary">
+                                <?php } else {?>
+                                    btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
+                                <?php }?>
+                                    Cancelamento de TEF
+                                    </div>
+                                <?php if ($_SESSION['cancelamento_tef'] == true) {?>
+                                    </a>
+                                <?php }?>
+
+                            <!-- FIM CANCELAMENTO TEF -->
+
+                            <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
+                                      <a href="Fluxo Auditoria/index.php"  target="_blank">
+                                <?php }?>
+                                    <div class="btn m-2 p-4 btn-lg
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
                                     btn-outline-success">
                                 <?php } else {?>
                                     btn-secondary" style=" opacity :0.5; border:none; cursor: not-allowed;" >
                                 <?php }?>
-                                    Ligações - Call Center
+                                    Fluxo Auditoria
                                     </div>
-                                <?php if ($_SESSION['call_center'] == true) {?>
+                                    <?php if ($_SESSION['central'] == true || $_SESSION['gerente'] == true || $_SESSION['prevencao'] == true || $_SESSION['desenvolvedor'] == true) {?>
                                     </a>
                                 <?php }?>
-
-              <!-- FIM CALL CENTER-->
-            
-                                    <a href="http://aplicativo.villefort.com.br:5000/login.html" target="_blank">
-                              
-                                    <div class="btn m-2 p-4 btn-lg
-                               
-                                    btn-outline-primary">
-                 
-                                    WinThor
-                                    </div>
-                          
-                                    </a>
-
-                    
-                    
-
-
-
                             </div>
+
+<!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
+
 
 <!-------------------------------------------------------------------------- NOVA LINHA ------------------------------------------------------------------>
 
@@ -250,23 +275,5 @@ if (isset($_GET['email']) && $_GET['email'] != '') {
 }
 
 ?>
-<script>
-
-    function listaFilial2() {
-        var filiais = [];
-        var filial = []
-        var api_url = "http://192.168.100.229:8008/api/";
-        $.getJSON(api_url + 'econectFilial', function (result) {
-            for (i = 0; i < result.length; i++) {
-                variavel = result[i]
-                varcodfilial = variavel.codfilial
-                varfilialS = variavel.filialS
-                filial.push({ codfilial: varcodfilial, nome: varfilialS })
-            }
-            localStorage.setItem('itens', JSON.stringify(filial));
-        });
-    }
-    listaFilial2();
-</script>
 
 </html>

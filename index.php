@@ -162,7 +162,9 @@
         </footer>
     </body>
 </html>
+
 <?php
+
 if (!empty($_GET['msg']) && $_GET['msg'] != '') {
     $_SESSION['gerente'] = false;
     if ($_GET['msg'] == 'Nao_autenticado') {

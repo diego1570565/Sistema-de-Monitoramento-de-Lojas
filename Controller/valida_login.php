@@ -287,11 +287,59 @@ for ($x = 0; $x < $info["count"]; $x++) {
             $key = str_replace('CN=', '', $key[0]);
             $permissoes[] = $key;
         endforeach;
-        $usuario = array_search('Fluxo - Testes', $permissoes);
+        $usuario = array_search('Fluxo - Administrador', $permissoes);
         $ti = array_search('TI', $permissoes);
         if ($usuario == true):
             $tipoUser = 'usuario';
             $_SESSION['desenvolvedor'] = true;
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode(",", $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Processos', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+
+            $_SESSION['auditor_fiscal_central'] = false;
+            $_SESSION['auditor_processos'] = true;
+        
+        endif;
+    else:
+        $tipoUser = 'null';
+        $acesso = false;
+    endif;
+}
+//=========================================================================
+
+for ($x = 0; $x < $info["count"]; $x++) {
+    if ($info[$x]['memberof']['count'] != 0):
+        echo '<pre>';
+        foreach ($info[$x]['memberof'] as $key):
+            $key = explode(",", $key);
+            $key = str_replace('CN=', '', $key[0]);
+            $permissoes[] = $key;
+        endforeach;
+        $usuario = array_search('Fluxo - Fiscal Central', $permissoes);
+        $ti = array_search('TI', $permissoes);
+        if ($usuario == true):
+            $tipoUser = 'usuario';
+
+            $_SESSION['auditor_fiscal_central'] = true;
+            $_SESSION['auditor_processos'] = false;
+        
         endif;
     else:
         $tipoUser = 'null';
@@ -326,6 +374,32 @@ if ($acesso === true):
     // $_SESSION['prevencao'] = false;
     // $_SESSION['gerente'] = false;
     // $_SESSION['central'] = true;
+    //--------------------------------------
+
+    // Permissões de Desenvolvedor
+
+    if ($_SESSION['desenvolvedor'] == true){
+        $_SESSION['status_vnc'] = true;
+        $_SESSION['cancelamento_item'] = true;
+        $_SESSION['call_center'] = true;
+        $_SESSION['cupom_cancelado'] = true;
+        $_SESSION['desconto'] = true;
+        $_SESSION['sangria'] = true;
+        $_SESSION['posicao_caixa'] = true;
+        $_SESSION['cancelamento_tef'] = true;
+        $_SESSION['central'] = true;
+    }
+
+    // Permissões da Auditoria
+    
+    if ($_SESSION['cancelamento_item'] == true ||
+        $_SESSION['cupom_cancelado'] == true ||
+        $_SESSION['desconto'] == true ||
+        $_SESSION['sangria'] == true ||
+        $_SESSION['cancelamento_tef'] == true||
+        $_SESSION['central'] == true){
+        $_SESSION['Auditoria'] = true;
+    }
 
     //--------------------------------------
 
